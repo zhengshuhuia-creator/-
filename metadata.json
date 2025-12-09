@@ -1,0 +1,7 @@
+{
+  "name": "Clow Card Gesture Interface",
+  "description": "A magical Clow Card selection interface controlled by hand gestures using MediaPipe.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
