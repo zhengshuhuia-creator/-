@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Clow Card - Gesture Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Clow Card - Gesture Interface</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,6 +12,9 @@
         font-family: 'Cinzel', serif;
         background-color: #0f0f16;
         overflow: hidden;
+        /* Critical for gesture apps on mobile to prevent pull-to-refresh */
+        overscroll-behavior: none;
+        touch-action: none; 
       }
       /* Custom Scrollbar for hidden utility */
       ::-webkit-scrollbar {

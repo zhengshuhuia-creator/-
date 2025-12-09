@@ -51,7 +51,9 @@ const WebcamHandler: React.FC<WebcamHandlerProps> = ({ onHandEvent }) => {
         if (
           webcamRef.current &&
           webcamRef.current.video &&
-          webcamRef.current.video.readyState === 4
+          webcamRef.current.video.readyState === 4 &&
+          webcamRef.current.video.videoWidth > 0 && 
+          webcamRef.current.video.videoHeight > 0
         ) {
           const video = webcamRef.current.video;
           const startTimeMs = performance.now();
@@ -109,25 +111,25 @@ const WebcamHandler: React.FC<WebcamHandlerProps> = ({ onHandEvent }) => {
   }, []);
 
   return (
-    <div className="absolute top-4 right-4 w-48 h-36 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg z-50 bg-black">
+    <div className="absolute top-4 right-4 w-32 h-24 md:w-48 md:h-36 rounded-lg overflow-hidden border-2 border-white/20 shadow-lg z-50 bg-black">
       {/* Loading Overlay - Only show if stream is NOT ready */}
       {(!isStreamReady && !cameraError) && (
          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-xs bg-black z-20 space-y-2 pointer-events-none">
             <div className="w-4 h-4 border-2 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
-            <span>Starting Camera...</span>
+            <span className="text-[9px]">Camera...</span>
          </div>
       )}
       
       {/* Vision Loading Overlay - Semi-transparent if stream is ready but vision is not */}
       {(isStreamReady && !isVisionReady && !cameraError) && (
-         <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] p-1 text-center z-20 pointer-events-none">
-            Loading AI Model...
+         <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[9px] p-1 text-center z-20 pointer-events-none">
+            Loading AI...
          </div>
       )}
 
       {/* Error Overlay */}
       {cameraError && (
-          <div className="absolute inset-0 flex items-center justify-center text-red-400 text-[10px] bg-black p-4 text-center z-30 leading-tight">
+          <div className="absolute inset-0 flex items-center justify-center text-red-400 text-[10px] bg-black p-2 text-center z-30 leading-tight">
               {cameraError}
           </div>
       )}
@@ -145,7 +147,7 @@ const WebcamHandler: React.FC<WebcamHandlerProps> = ({ onHandEvent }) => {
             height: '100%',
             objectFit: 'cover',
             zIndex: 10,
-            opacity: isStreamReady ? 1 : 0 // Simple toggle, no transition to avoid bugs
+            opacity: isStreamReady ? 1 : 0 
         }}
         onUserMediaError={handleUserMediaError}
         onUserMedia={handleUserMedia}
@@ -156,8 +158,8 @@ const WebcamHandler: React.FC<WebcamHandlerProps> = ({ onHandEvent }) => {
         }}
       />
       
-      <div className="absolute bottom-1 left-2 text-[10px] text-white/50 pointer-events-none z-30 font-mono drop-shadow-md">
-        System: {isVisionReady ? 'Active' : 'Init...'}
+      <div className="absolute bottom-1 left-2 text-[8px] text-white/50 pointer-events-none z-30 font-mono drop-shadow-md">
+        {isVisionReady ? 'ONLINE' : '...'}
       </div>
     </div>
   );
