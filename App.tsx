@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const isSpread = gesture === 'OPEN';
 
   return (
-    <div className="relative w-screen h-[100dvh] bg-[#0f0f16] overflow-hidden text-white">
+    <div className="relative w-screen h-screen bg-[#0f0f16] overflow-hidden text-white">
       {/* Dynamic Starry Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#2a1b3d_0%,_#0f0f16_100%)] z-0"></div>
       
